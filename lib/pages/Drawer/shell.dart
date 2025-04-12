@@ -24,9 +24,13 @@ class _ShellState extends State<Shell> with SingleTickerProviderStateMixin {
 
   final List<DrawerItem> _drawerItems = [
     DrawerItem(icon: Icons.home, title: 'خانه', route: "/Home"),
-    DrawerItem(icon: Icons.settings, title: 'تنظیمات'),
-    DrawerItem(icon: Icons.person, title: 'Profile'),
-    DrawerItem(icon: Icons.notifications, title: 'اعلانات'),
+    DrawerItem(icon: Icons.settings, title: 'تنظیمات', route: "/Settings"),
+    DrawerItem(icon: Icons.person, title: 'نمایه', route: "/Profile"),
+    DrawerItem(
+      icon: Icons.notifications,
+      title: 'اعلانات',
+      route: "/notifications",
+    ),
     DrawerItem(
       icon: Icons.calculate,
       title: 'ماشین حساب',

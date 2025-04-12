@@ -5,6 +5,9 @@ import 'pages/Drawer/home.dart';
 import 'main.dart';
 import 'pages/Drawer/Calculator.dart';
 import 'pages/Drawer/shell.dart';
+import 'pages/Drawer/Notifications.dart';
+import 'pages/Drawer/Profile.dart';
+import 'pages/Drawer/Settings.dart';
 
 final router = GoRouter(
   routes: [
@@ -26,6 +29,22 @@ final router = GoRouter(
           path: '/Calculator',
           pageBuilder:
               (context, state) => const NoTransitionPage(child: Calculator()),
+        ),
+        GoRoute(
+          path: '/Settings',
+          pageBuilder:
+              (context, state) => const NoTransitionPage(child: Settings()),
+        ),
+        GoRoute(
+          path: '/Profile',
+          pageBuilder:
+              (context, state) => const NoTransitionPage(child: Profile()),
+        ),
+        GoRoute(
+          path: '/notifications',
+          pageBuilder:
+              (context, state) =>
+                  const NoTransitionPage(child: Notifications()),
         ),
       ],
     ),
