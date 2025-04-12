@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 class Home extends StatefulWidget {
   final String? number;
-  const Home({Key? key, this.number}) : super(key: key);
+  const Home({super.key, this.number});
 
   @override
   State<Home> createState() => _HomeState();

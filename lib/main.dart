@@ -31,8 +31,29 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _textController = TextEditingController();
-  String enteredText = "";
-  String englandEnteredText = "";
+  bool _isFormValid = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController.addListener(_validateForm);
+  }
+
+  @override
+  void dispose() {
+    _textController.removeListener(_validateForm);
+    _textController.dispose();
+    super.dispose();
+  }
+
+  void _validateForm() {
+    final isValid = _formKey.currentState?.validate() ?? false;
+    if (isValid != _isFormValid) {
+      setState(() {
+        _isFormValid = isValid;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +64,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       borderRadius: BorderRadius.circular(15),
     );
+
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.rtl,
@@ -76,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 20.0),
                     Form(
                       key: _formKey,
+                      autovalidateMode: AutovalidateMode.always,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -106,6 +129,8 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             child: TextFormField(
                               controller: _textController,
+                              keyboardType: TextInputType.phone,
+                              onChanged: (value) => _validateForm(),
                               decoration: InputDecoration(
                                 labelText: "شماره همراه",
                                 hintText: "مثال: ۸۸۶۵ ۶۶۵ ۰۹۱۳",
@@ -138,17 +163,23 @@ class _LoginPageState extends State<LoginPage> {
                             width: double.infinity,
                             height: 52.0,
                             child: ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  final enteredText = _textController.text;
-                                  final englandEnteredText =
-                                      convertFarsiToEnglishNumbers(enteredText);
-                                  context.go(
-                                    '/password',
-                                    extra: englandEnteredText,
-                                  );
-                                }
-                              },
+                              onPressed:
+                                  _isFormValid
+                                      ? () {
+                                        if (_formKey.currentState!.validate()) {
+                                          final enteredText =
+                                              _textController.text;
+                                          final englandEnteredText =
+                                              convertFarsiToEnglishNumbers(
+                                                enteredText,
+                                              );
+                                          context.go(
+                                            '/password',
+                                            extra: englandEnteredText,
+                                          );
+                                        }
+                                      }
+                                      : null,
                               child: Text("تایید و ادامه"),
                             ),
                           ),

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 class Password extends StatefulWidget {
   final String? number;
 
-  const Password({Key? key, this.number}) : super(key: key);
+  const Password({super.key, this.number});
 
   @override
   State<Password> createState() => _PasswordState();

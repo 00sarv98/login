@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 class Shell extends StatefulWidget {
   final Widget child;
   final String? number;
-  const Shell({Key? key, required this.child, this.number}) : super(key: key);
+  const Shell({super.key, required this.child, this.number});
 
   @override
   State<Shell> createState() => _ShellState();
@@ -227,7 +227,7 @@ class _ShellState extends State<Shell> with SingleTickerProviderStateMixin {
                                 ),
                               ),
                             );
-                          }).toList(),
+                          }),
                         ],
                       ),
                     ),

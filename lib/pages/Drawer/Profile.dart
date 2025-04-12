@@ -7,7 +7,7 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        "صففحه نمایه",
+        "صفحه نمایه",
         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
     );
