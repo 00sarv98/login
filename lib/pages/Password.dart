@@ -74,7 +74,11 @@ class _PasswordState extends State<Password> {
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_formKeyTwo.currentState!.validate()) {
-                                  context.go('/home', extra: widget.number);
+                                  WidgetsBinding.instance.addPostFrameCallback((
+                                    _,
+                                  ) {
+                                    context.go('/home', extra: widget.number);
+                                  });
                                 }
                               },
                               child: Text("تایید و ادامه"),

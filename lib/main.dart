@@ -1,31 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:login/home.dart';
-import 'Password.dart';
+import 'router.dart';
+import 'frequently_used_functions.dart';
 
 void main() {
   runApp(MyApp());
 }
-
-final router = GoRouter(
-  routes: [
-    GoRoute(path: '/', builder: (context, state) => const LoginPage()),
-    GoRoute(
-      path: '/password',
-      builder:
-          (context, state) => Password(
-            number: state.extra as String?, // ارسال داده به کانستراکتور
-          ),
-    ),
-    GoRoute(
-      path: "/home",
-      builder:
-          (context, state) => HomePage(
-            number: state.extra as String?, // ارسال داده به کانستراکتور
-          ),
-    ),
-  ],
-);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -54,31 +34,15 @@ class _LoginPageState extends State<LoginPage> {
   String enteredText = "";
   String englandEnteredText = "";
 
-  // تابع تبدیل کننده اعداد فارسی به انگلیسی
-  String convertFarsiToEnglishNumbers(String input) {
-    const Map<String, String> farsiToEnglish = {
-      '۰': '0',
-      '۱': '1',
-      '۲': '2',
-      '۳': '3',
-      '۴': '4',
-      '۵': '5',
-      '۶': '6',
-      '۷': '7',
-      '۸': '8',
-      '۹': '9',
-    };
-
-    String output = input;
-    farsiToEnglish.forEach((farsiNum, englishNum) {
-      output = output.replaceAll(farsiNum, englishNum);
-    });
-
-    return output;
-  }
-
   @override
   Widget build(BuildContext context) {
+    var boxDecoration = BoxDecoration(
+      border: Border.all(
+        color: const Color.fromARGB(255, 133, 133, 133),
+        width: 1,
+      ),
+      borderRadius: BorderRadius.circular(15),
+    );
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.rtl,
@@ -122,18 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                                 // Handle country selection
                               },
                               child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: const Color.fromARGB(
-                                      255,
-                                      133,
-                                      133,
-                                      133,
-                                    ),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
+                                decoration: boxDecoration,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Row(
