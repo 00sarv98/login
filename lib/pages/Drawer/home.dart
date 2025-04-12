@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
       child: Padding(
         padding: const EdgeInsets.only(top: 16),
         child: Text(
-          'سلام کاربر ${widget.number}',
+          widget.number == null ? "صفحه خانه" : "سلام کاربر ${widget.number}",
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),

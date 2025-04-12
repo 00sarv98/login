@@ -5,6 +5,11 @@ class Notifications extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("صففحه اعلانات"));
+    return Center(
+      child: Text(
+        "صفحه اعلانات",
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+    );
   }
 }

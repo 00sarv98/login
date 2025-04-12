@@ -5,6 +5,11 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("صففحه تنظیمات"));
+    return Center(
+      child: Text(
+        "صففحه تنظیمات",
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+    );
   }
 }

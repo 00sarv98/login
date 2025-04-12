@@ -5,6 +5,11 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("صففحه نمایه"));
+    return Center(
+      child: Text(
+        "صففحه نمایه",
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+    );
   }
 }
