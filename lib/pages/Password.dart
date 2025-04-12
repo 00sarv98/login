@@ -21,7 +21,7 @@ class _PasswordState extends State<Password> {
         textDirection: TextDirection.rtl,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.only(bottom: 20.0, top: 50),
             child: Center(
               child: SizedBox(
                 width: 336.0,
@@ -41,7 +41,7 @@ class _PasswordState extends State<Password> {
                       "کد ارسال شده به شماره همراه ${widget.number} را وارد کنید",
                       style: TextStyle(fontSize: 14.0),
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: 30.0),
                     Form(
                       key: _formKeyTwo,
                       child: Column(
@@ -66,7 +66,7 @@ class _PasswordState extends State<Password> {
                             ),
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.3,
+                            height: MediaQuery.of(context).size.height * 0.5,
                           ),
                           SizedBox(
                             width: double.infinity,

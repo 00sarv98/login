@@ -140,14 +140,14 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               validator: (String? value) {
                                 if (value == null || value.isEmpty) {
-                                  return "لطفا شماره تلفن را وارد کنید";
+                                  return "لطفا شماره همراه خود را وارد کنید";
                                 }
                                 final englandEnteredText =
                                     convertFarsiToEnglishNumbers(value);
                                 if (!englandEnteredText.startsWith("09") &&
                                     !englandEnteredText.startsWith("989") &&
                                     !englandEnteredText.startsWith("+989")) {
-                                  return "لطفا شماره تلفن با فرمت صحیح وارد کنید";
+                                  return "لطفا شماره همراه را با فرمت صحیح وارد کنید";
                                 }
                                 if (englandEnteredText.length < 11) {
                                   return "شماره تلفن باید حداقل ۱۱ رقم باشد";
