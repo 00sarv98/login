@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:login/bloc/theme/theme_bloc.dart';
+import 'package:login/theme.dart';
 import 'router.dart';
 import 'frequently_used_functions.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -12,11 +15,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'ورود به سیستم',
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: "shabnam"),
-      routerConfig: router,
-      debugShowCheckedModeBanner: false,
+    return BlocProvider(
+      create: (context) => ThemeBloc(),
+      child: const AppWithTheme(),
+    );
+  }
+}
+
+class AppWithTheme extends StatelessWidget {
+  const AppWithTheme({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        final theme =
+            state is ThemeDark ? MyThemeData.darkTheme : MyThemeData.lightTheme;
+
+        return MaterialApp.router(
+          title: 'ورود به سیستم',
+          theme: theme,
+          routerConfig: router,
+          debugShowCheckedModeBanner: false,
+        );
+      },
     );
   }
 }
@@ -57,11 +79,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    var boxDecoration = BoxDecoration(
-      border: Border.all(
-        color: const Color.fromARGB(255, 133, 133, 133),
-        width: 1,
-      ),
+    final boxDecoration = BoxDecoration(
+      border: Border.all(color: const Color.fromARGB(255, 133, 133, 133)),
       borderRadius: BorderRadius.circular(15),
     );
 
@@ -78,24 +97,24 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "شماره همراه",
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 20.0),
-                    Text(
+                    const SizedBox(height: 20.0),
+                    const Text(
                       "3.32.0(100662)",
                       style: TextStyle(color: Colors.grey),
                     ),
-                    SizedBox(height: 20.0),
-                    Text(
+                    const SizedBox(height: 20.0),
+                    const Text(
                       "لطفا کشور و شمارهٔ همراه خود را وارد کنید.",
                       style: TextStyle(fontSize: 14.0),
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     Form(
                       key: _formKey,
                       autovalidateMode: AutovalidateMode.always,
@@ -110,12 +129,12 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               child: Container(
                                 decoration: boxDecoration,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(10.0),
                                   child: Row(
                                     children: [
                                       Text("ایران"),
-                                      Expanded(child: Container()),
+                                      Spacer(),
                                       Text("+98"),
                                       SizedBox(width: 15),
                                       Icon(Icons.arrow_forward_ios),
@@ -125,36 +144,34 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 23.0),
-                          SizedBox(
-                            child: TextFormField(
-                              controller: _textController,
-                              keyboardType: TextInputType.phone,
-                              onChanged: (value) => _validateForm(),
-                              decoration: InputDecoration(
-                                labelText: "شماره همراه",
-                                hintText: "مثال: ۸۸۶۵ ۶۶۵ ۰۹۱۳",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
+                          const SizedBox(height: 23.0),
+                          TextFormField(
+                            controller: _textController,
+                            keyboardType: TextInputType.phone,
+                            onChanged: (value) => _validateForm(),
+                            decoration: InputDecoration(
+                              labelText: "شماره همراه",
+                              hintText: "مثال: ۸۸۶۵ ۶۶۵ ۰۹۱۳",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
                               ),
-                              validator: (String? value) {
-                                if (value == null || value.isEmpty) {
-                                  return "لطفا شماره همراه خود را وارد کنید";
-                                }
-                                final englandEnteredText =
-                                    convertFarsiToEnglishNumbers(value);
-                                if (!englandEnteredText.startsWith("09") &&
-                                    !englandEnteredText.startsWith("989") &&
-                                    !englandEnteredText.startsWith("+989")) {
-                                  return "لطفا شماره همراه را با فرمت صحیح وارد کنید";
-                                }
-                                if (englandEnteredText.length < 11) {
-                                  return "شماره تلفن باید حداقل ۱۱ رقم باشد";
-                                }
-                                return null;
-                              },
                             ),
+                            validator: (String? value) {
+                              if (value == null || value.isEmpty) {
+                                return "لطفا شماره همراه خود را وارد کنید";
+                              }
+                              final englandEnteredText =
+                                  convertFarsiToEnglishNumbers(value);
+                              if (!englandEnteredText.startsWith("09") &&
+                                  !englandEnteredText.startsWith("989") &&
+                                  !englandEnteredText.startsWith("+989")) {
+                                return "لطفا شماره همراه را با فرمت صحیح وارد کنید";
+                              }
+                              if (englandEnteredText.length < 11) {
+                                return "شماره تلفن باید حداقل ۱۱ رقم باشد";
+                              }
+                              return null;
+                            },
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.3,
@@ -180,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                                         }
                                       }
                                       : null,
-                              child: Text("تایید و ادامه"),
+                              child: const Text("تایید و ادامه"),
                             ),
                           ),
                         ],
