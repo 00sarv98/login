@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:login/bloc/theme/theme_bloc.dart';
+import 'package:login/bloc/name_user/name_user_bloc.dart';
 import 'package:login/theme.dart';
 import 'router.dart';
 import 'frequently_used_functions.dart';
@@ -15,8 +16,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThemeBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ThemeBloc>(create: (context) => ThemeBloc()),
+        BlocProvider<NameUserBloc>(create: (context) => NameUserBloc()),
+      ],
       child: const AppWithTheme(),
     );
   }
@@ -193,6 +197,9 @@ class _LoginPageState extends State<LoginPage> {
                                           context.go(
                                             '/password',
                                             extra: englandEnteredText,
+                                          );
+                                          context.read<NameUserBloc>().add(
+                                            TextChanged(englandEnteredText),
                                           );
                                         }
                                       }

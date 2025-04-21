@@ -90,18 +90,21 @@ class _ShellState extends State<Shell> with SingleTickerProviderStateMixin {
         title: const Text('دراور هاوری'),
         backgroundColor: const Color.fromARGB(255, 150, 204, 247),
         actions: [
-          BlocBuilder<ThemeBloc, ThemeState>(
-            builder: (context, state) {
-              return IconButton(
-                icon: Icon(
-                  state is ThemeDark ? Icons.light_mode : Icons.dark_mode,
-                  color: Colors.yellow, // رنگ ثابت برای بهتر دیده شدن
-                ),
-                onPressed: () {
-                  context.read<ThemeBloc>().add(ToggleTheme());
-                },
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BlocBuilder<ThemeBloc, ThemeState>(
+              builder: (context, state) {
+                return IconButton(
+                  icon: Icon(
+                    state is ThemeDark ? Icons.light_mode : Icons.dark_mode,
+                    color: Colors.yellow, // رنگ ثابت برای بهتر دیده شدن
+                  ),
+                  onPressed: () {
+                    context.read<ThemeBloc>().add(ToggleTheme());
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),

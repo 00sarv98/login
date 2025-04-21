@@ -29,11 +29,5 @@ class MyThemeData {
       surface: Colors.grey, // سطح تیره
       background: Colors.black87, // پس‌زمینه مشکی
     ),
-    cardTheme: CardTheme(
-      color: Colors.grey[800], // رنگ کارت تیره
-    ),
-    dialogTheme: DialogTheme(
-      backgroundColor: Colors.grey[800], // رنگ دیالوگ تیره
-    ),
   );
 }
