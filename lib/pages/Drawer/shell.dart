@@ -108,7 +108,17 @@ class _ShellState extends State<Shell> with SingleTickerProviderStateMixin {
       body: Stack(
         children: [
           // Main Content
-          Container(color: Colors.white, child: widget.child),
+          BlocBuilder<ThemeBloc, ThemeState>(
+            builder: (context, state) {
+              if (state is ThemeDark) {
+                return Container(
+                  color: const Color.fromARGB(255, 93, 75, 75),
+                  child: widget.child,
+                );
+              } else
+                return Container(color: Colors.white, child: widget.child);
+            },
+          ),
 
           // Drawer Section
           Positioned(
